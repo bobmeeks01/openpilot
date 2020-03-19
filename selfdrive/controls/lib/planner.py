@@ -27,9 +27,11 @@ _A_CRUISE_MIN_BP = [   0., 5.,  10., 20.,  40.]
 
 # need fast accel at very low speed for stop and go
 # make sure these accelerations are smaller than mpc limits
-_A_CRUISE_MAX_V = [1.2, 1.2, 0.65, .4]
+# _A_CRUISE_MAX_V = [1.2, 1.2, 0.65, .4]
+_A_CRUISE_MAX_V = [1.4, 1.2, 0.5, .2]
 _A_CRUISE_MAX_V_FOLLOWING = [1.6, 1.6, 0.65, .4]
-_A_CRUISE_MAX_BP = [0.,  6.4, 22.5, 40.]
+# _A_CRUISE_MAX_BP = [0.,  6.4, 22.5, 40.]
+_A_CRUISE_MAX_BP = [0.,  6.4, 20, 30.]
 
 # Lookup table for turns
 _A_TOTAL_MAX_V = [1.7, 3.2]
@@ -143,8 +145,10 @@ class Planner():
 
       a_y_max = 2.975 - v_ego * 0.0375  # ~1.85 @ 75mph, ~2.6 @ 25mph
       v_curvature = np.sqrt(a_y_max / np.clip(np.abs(curv), 1e-4, None))
-      model_speed = np.min(v_curvature)
-      model_speed = max(20.0 * CV.MPH_TO_MS, model_speed) # Don't slow down below 20mph
+      # model_speed = np.min(v_curvature)
+      # model_speed = max(20.0 * CV.MPH_TO_MS, model_speed) # Don't slow down below 20mph
+      model_speed = MAX_SPEED
+      model_speed = MAX_SPEED
     else:
       model_speed = MAX_SPEED
 
